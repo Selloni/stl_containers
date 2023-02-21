@@ -6,15 +6,19 @@ namespace s21 {
 template <typename T>
 class Vector {
     T* arr; // pointer array
-    sizr_t sz; // count size
+    size_t sz; // count size
     size_t cap; // count element
 
 public:
-    Vector(size_t n, const T& value = T()); // создать вектор от параметров
+    // Vector(size_t n, const T& value = T()); // создать вектор от параметров
 
-    // T& operaror[](size_t i) {  // обращенеи к индексу без проверки
-    //     return arr[i];
-    // }
+    T& operator[](size_t i) {  // обращенеи к индексу без проверки
+        return arr[i];
+    }
+
+    const T& operator[](size_t i) const {  // обращенеи к индексу без проверки
+        return arr[i];
+    }
 
     T& at(size_t i) {
         if(i >= sz) throw std::out_of_range("проверка на диапозон");
@@ -37,9 +41,9 @@ public:
     //     }
     // }
 
-    size_t capacity() const {
-        return cap;
-    }
+    // size_t capacity() const {
+    //     return cap;
+    // }
 
     void reserve(size_t n) { //
         if (n <= cap) return;
@@ -49,9 +53,9 @@ public:
         size_t i = 0;
         try {
             for (; i < sz; ++i) {
-                new(newaar + i) T(arr[i]);
+                new(newarr + i) T(arr[i]);
             }
-        } catch () {
+        } catch (...) {
             for(size_t j = 0; j < i; ++j) {
                 (newarr + i)->~T();
             }
@@ -69,7 +73,7 @@ public:
         arr = newarr;
     }
 
-    void push_back(const T& value){
+    void push_back(const T& value) {
         if (sz == cap) reserve(2 * cap);
         new (arr + sz) T(value);
         ++sz;
@@ -79,9 +83,6 @@ public:
         (arr+sz-1)->~T();
         --sz;
     }
-
-
-
-privat:
+// privat:
 };
 } // namespase s21
