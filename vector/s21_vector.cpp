@@ -17,9 +17,9 @@
 // using namespace s21;
 
 int main () {
-  s21::Vector<int> v = (1,2,3);
+  s21::Vector<int> v = {1,2,3};
   v.push_back(25);
-  for (int i = 0 ; i < 2; ++i) {
+  for (int i = 0 ; i < 3; ++i) {
     std::cout << v.at(i);
   }
 
