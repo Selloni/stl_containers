@@ -1,6 +1,9 @@
 #ifndef SRC_VECTOR_S21_VECTOR_H_
 #define SRC_VECTOR_S21_VECTOR_H_
 
+#include <initializer_list>
+
+
 namespace s21 {
 
 template <typename T>
