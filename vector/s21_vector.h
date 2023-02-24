@@ -1,12 +1,11 @@
-#ifndef SRC_VECTOR_S21_VECTOR_H_
-#define SRC_VECTOR_S21_VECTOR_H_
+#ifndef S21_VECTOR_H_
+#define S21_VECTOR_H_
 
+#include <initializer_list>
 
 namespace s21 {
 template <typename T>
 class Vector {
-
-
 public:
 ///////////  attribute  //////////
     using value_type = T;
@@ -22,7 +21,6 @@ private:
     size_t cap_; // count element
 
 public:
-    // Vector(size_t n, const T& value = T()); // создать вектор от параметров
 
     Vector<T>(std::initializer_list<value_type> const &items) {
     arr_ = new value_type[items.size()];
@@ -37,8 +35,6 @@ public:
 
     Vector(): arr_(nullptr), sz_(0u), cap_(0u)
     {}
-
-    // Vector<T>::Vector(size_type size, const_ref value)
 
     ~Vector(){ delete[] arr_; }
 
@@ -56,48 +52,7 @@ public:
         return arr_[i];
     }
 
-    // void resize(size_t n , const T& value = T()) {//  
-    //     if (n < cap_) reserve(cap_);
-    //     for (size_t i = sz_; i < n; ++i) {
-    //         if (n > sz_) {
-    //             // доложить value
-    //         } else {
-    //             // удалить элементы 
-    //         }
-    //     }
-    // }
-
-    // size_t cap_acity() const {
-    //     return cap_;
-    // }
-
-    void reserve(size_t n) { //
-        if (n <= cap_) return;
-
-        pointer newarr = reinterpret_cast<pointer>(new int8_t[n*sizeof(T)]); // выделение байт
-
-        size_t i = 0;
-        try {
-            for (; i < sz_; ++i) {
-                new(newarr + i) T(arr_[i]);
-            }
-        } catch (...) {
-            for(size_t j = 0; j < i; ++j) {
-                (newarr + i)->~T();
-            }
-            delete[] reinterpret_cast<int8_t*>(arr_);
-            throw;
-        }
-
-        for(size_t i = 0; i< sz_; i++) {
-            new(newarr  + i) T(arr_[i]); // вызов конструктора по данному адресу
-        }
-        for(size_t i = 0; i < sz_; ++i){
-            (arr_ + i)->~T();   // явный вызов конструктора
-        }
-        delete[] reinterpret_cast<int8_t*>(arr_); //очищаяем массив 
-        arr_ = newarr;
-    }
+    void reserve(size_t n);
 
     void push_back(const T& value) {
         if (sz_ == cap_) reserve(2 * cap_);
@@ -113,4 +68,5 @@ public:
 };
 } // namespase s21
 
-#endif //  SRC_VECTOR_S21_VECTOR_H_
+// #include "s21_vector_relize.h"
+#endif //  S21_VECTOR_H_

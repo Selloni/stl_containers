@@ -1,7 +1,7 @@
 // #include "s21_container.h"
 #include <vector>
 #include <iostream>
-#include "s21_vector.h"
+#include "s21_vector_relize.h"
 
 // template <typename T>
 // void f(T x) {
@@ -18,7 +18,7 @@
 
 int main () {
   s21::Vector<int> v = {1,2,3};
-  v.push_back(25);
+  // v.push_back(25);
   for (int i = 0 ; i < 3; ++i) {
     std::cout << v.at(i);
   }
