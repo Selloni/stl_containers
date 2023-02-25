@@ -2,18 +2,21 @@
 #define SRC_VECTOR_S21_VECTOR_H_
 
 #include <initializer_list>
+#include <utility>
+#include <iostream>
 
-
+template <class T>
 namespace s21 {
-
-template <typename T>
+//template <typename T>
 class Vector {
     using value_type = T;
-    using ref = T&;
-    using const_ref = const T&;
+    using reference = T&;
+    using const_reference = const T&;
     using size_type = std::size_t;
     using pointer = T*;
+    using iterator = T*;
     using const_pointer = const T*;
+    using const_iteartor = const T*;
 
 private:
     T* arr_; // pointer array
@@ -22,27 +25,29 @@ private:
 
 public:
     // Vector(size_t n, const T& value = T()); // создать вектор от параметров
+    Vector() : sz_(0U), cap_(0U), arr_(nullptr) {}
 
-    Vector<T>(std::initializer_list<value_type> const &items);
+    explicit Vector(size_type n) : sz_(n), cap_(n), arr_(n ? new T[n] : nullptr) {}
 
-    Vector();
-    // Vector<T>::Vector(sizetype size, const_ref value)
+    Vector(const Vector &v) : sz_(v.sz_), cap_(v.cap_), arr_(v.arr_) {}
 
-    ~Vector(){ delete[] arr_; }
+    Vector(Vector &&v) : sz_(v.sz_), cap_(v.cap_), arr_(v.arr_)
+    {
+        v.arr = nullptr;
+        v.sz_ = 0;
+    }
+
+    ~Vector() { delete[] arr_; }
 
     T& operator[](size_t i) { return arr_[i]; } // обращенеи к индексу
 
     const T& operator[](size_t i) const { return arr_[i];}
 
-    T& at(size_t i) {
-        if(i >= sz_) throw std::out_of_range("s21::out_of_range");
-        return arr_[i];
-    }
+    Vector<T>(std::initializer_list<value_type> const &items);
 
-    const T& at(size_t i) const {
-        if(i >= sz_) throw std::out_of_range("s21::out_of_range");
-        return arr_[i];
-    }
+//    const T& operator[](size_t i);
+
+    T& at(size_t i);
 
     // void resize(size_t n , const T& value = T()) {//  
     //     if (n < cap_) reserve(cap_);
@@ -61,17 +66,7 @@ public:
 
     void reserve(size_t n);
 
-    void push_back(const T& value) {
-        if (sz_ == cap_) reserve(2 * cap_);
-        new (arr_ + sz_) T(value);
-        ++sz_;
-    }
-
-    void pop_back() {
-        (arr_+sz_-1)->~T();
-        --sz_;
-    }
-
+    void push_back(const T& value);
 };
 } // namespase s21
 

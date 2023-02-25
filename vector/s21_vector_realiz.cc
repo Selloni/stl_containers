@@ -1,10 +1,6 @@
 #include "s21_vector.h"
 
-using namespace s21;
-
-Vector(): arr_(nullptr), sz_(0u), cap_(0u)
-{}
-
+//using namespace s21;
 
 template <typename T>
 Vector<T>::Vector(std::initializer_list<value_type> const &items) {
@@ -46,3 +42,30 @@ void reserve(size_t n) { //
         delete[] reinterpret_cast<int8_t*>(arr_); //очищаяем массив 
         arr_ = newarr;
 }
+
+template <typename T>
+T& at(size_t i) {
+    if(i >= sz_) throw std::out_of_range("s21::out_of_range");
+    return arr_[i];
+}
+
+template <typename T>
+const T& at(size_t i) const {
+    if(i >= sz_) throw std::out_of_range("s21::out_of_range");
+    return arr_[i];
+}
+
+template <typename T>
+void pop_back() {
+    (arr_+sz_-1)->~T();
+    --sz_;
+}
+
+template <typename T>
+void push_back(const T& value) {
+    if (sz_ == cap_) reserve(2 * cap_);
+    new (arr_ + sz_) T(value);
+    ++sz_;
+}
+
+template class Vector<int>;
