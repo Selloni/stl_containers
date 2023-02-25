@@ -3,6 +3,7 @@
 
 #include <initializer_list>
 
+
 namespace s21 {
 template <typename T>
 class Vector {
@@ -22,39 +23,34 @@ private:
 
 public:
 
-    Vector<T>(std::initializer_list<value_type> const &items) {
-    arr_ = new value_type[items.size()];
-    size_t i = 0;
-    for (auto it = items.begin(); it != items.end(); it++) {
-        arr_[i] = *it;
-        i++;
-    }
-    sz_ = items.size();
-    cap_ = items.size();
-    }
+    Vector(std::initializer_list<value_type> const &items);
 
     Vector(): arr_(nullptr), sz_(0u), cap_(0u)
     {}
 
     ~Vector(){ delete[] arr_; }
 
-    T& operator[](size_t i) { return arr_[i]; } // обращенеи к индексу
+    ref operator[](size_t i) { return arr_[i]; } // обращенеи к индексу
 
-    const T& operator[](size_t i) const { return arr_[i];}
+    const_ref operator[](size_t i) const { return arr_[i];}
 
-    T& at(size_t i) {
+    ref at(size_t i) {
         if(i >= sz_) throw std::out_of_range("s21::out_of_range");
         return arr_[i];
     }
 
-    const T& at(size_t i) const {
+    const_ref at(size_t i) const {
         if(i >= sz_) throw std::out_of_range("s21::out_of_range");
         return arr_[i];
     }
 
     void reserve(size_t n);
 
-    void push_back(const T& value) {
+    size_type size(){
+        return sz_;
+    }
+
+    void push_back(const_ref value) {
         if (sz_ == cap_) reserve(2 * cap_);
         new (arr_ + sz_) T(value);
         ++sz_;
