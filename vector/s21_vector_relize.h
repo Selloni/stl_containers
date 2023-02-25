@@ -43,6 +43,31 @@ void Vector<T>::reserve(size_t n) {
     arr_ = newarr;
 }
 
+template <typename T>
+T& Vector<T>::at(size_t i) {
+    if(i >= sz_) throw std::out_of_range("s21::out_of_range");
+    return arr_[i];
+}
+
+template <typename T>
+const T& Vector<T>::at(size_t i) const {
+    if(i >= sz_) throw std::out_of_range("s21::out_of_range");
+    return arr_[i];
+}
+
+template <typename T>
+void Vector<T>::push_back(const_ref value) {
+    if (sz_ == cap_) reserve(2 * cap_);
+    new (arr_ + sz_) T(value);
+    ++sz_;
+}
+
+template <typename T>
+void Vector<T>::pop_back() {
+    (arr_+sz_-1)->~T();
+    --sz_;
+}
+
 
 }// s21
 

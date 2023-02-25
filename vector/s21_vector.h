@@ -13,8 +13,9 @@ public:
     using ref = T&;
     using const_ref = const T&;
     using size_type = std::size_t;
+    using iterator = T*;
     using pointer = T*;
-    using const_pointer = const T*;
+    using const_iterator = const T*;
 
 private:
     T* arr_; // pointer array
@@ -22,7 +23,7 @@ private:
     size_t cap_; // count element
 
 public:
-
+    ////// конструктор /////
     Vector(): arr_(nullptr), sz_(0u), cap_(0u)
     {}
 
@@ -35,55 +36,37 @@ public:
 
     ~Vector(){ delete[] arr_; }
 
-    T* begin(){
-        return arr_;
-    }
+    iterator begin(){return arr_;}
 
-    T* end() {
-        return arr_+sz_;
-    }
+    iterator end() {return arr_+sz_;}
 
     Vector(std::initializer_list<value_type> const &items);
 
 //    explicit Vector(size_type n)
 //            : m_size_(n), m_capacity_(n), arr_(n ? new T[n] : nullptr) {}
 
-    ref at(size_t i) {
-        if(i >= sz_) throw std::out_of_range("s21::out_of_range");
-        return arr_[i];
-    }
+    ref at(size_t i);
 
-    const_ref at(size_t i) const {
-        if(i >= sz_) throw std::out_of_range("s21::out_of_range");
-        return arr_[i];
-    }
+    const_ref at(size_t i) const ;
 
     void reserve(size_t n);
 
-    size_type size() const {
-        return sz_;
-    }
+    size_type size() const {return sz_;}
 
-    void push_back(const_ref value) {
-        if (sz_ == cap_) reserve(2 * cap_);
-        new (arr_ + sz_) T(value);
-        ++sz_;
-    }
+    void push_back(const_ref value);
 
-    void pop_back() {
-        (arr_+sz_-1)->~T();
-        --sz_;
-    }
+    void pop_back();
 
-    ref operator[](size_t i) { return arr_[i]; } // обращенеи к индексу
+    ref operator[](size_t i) { return arr_[i]; }
 
     const_ref operator[](size_t i) const { return arr_[i]; }
-//
-//    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(other.arr_) {
-//        //удалить старый масви
-//        // отнять масив в свой
-//        // обнулисть other.arr_ = nullptr; sz_ = 0 ; cap_ = 0;
-//        return *this;
+
+    bool empty(){return sz_;}
+
+//    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(arr_ = new T[sz_]) {
+//        for(size_t i=0; i < sz_; ++i){
+//            arr_[i] = other.arr_[i];
+//        }
 //    }
 
 };

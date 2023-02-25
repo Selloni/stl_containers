@@ -33,10 +33,12 @@ TEST(vector, 4) {
     ASSERT_ANY_THROW(s21_v.at(4));
 }
 
-//TEST(vector, 5) {
-//    s21::Vector<double> s21_v = {1,2,3,4};
-//    ASSERT_EQ(s21_v[i],v[i]);
-//}
+TEST(vector, 5) {
+    s21::Vector<double> s21_v = {1};
+    ASSERT_TRUE(s21_v.empty());
+    s21_v.pop_back();
+    ASSERT_FALSE(s21_v.empty());
+}
 
 TEST(vector, 6) {
     s21::Vector<double> s21_v = {1,1,3};
