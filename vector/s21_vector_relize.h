@@ -77,14 +77,16 @@ T* Vector<T>::insert(const_iterator pos, const T& value ) {
     if (pos == this->end()) {
         push_back(value);
     } else {
-        tmp.arr_[pos - begin()] = value;
-        //////
-        /////
-        /////
+        arr_[pos - begin] = value;
+        for (size_t i=(pos-begin()+1); i < sz_ - 1; ++i) {
+            arr_[i] = tmp.arr_[i-1];
+        }
+
+        push_back(tmp.back());
+
+        return pos;
     }
 }
-
-
 
 }// s21
 

@@ -70,6 +70,10 @@ public:
 
     iterator insert(const_iterator pos, const T& value);
 
+    const_ref front() {return arr_[0];}
+
+    const_ref back() {return arr_[sz_-1];}
+
 //    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(arr_ = new T[sz_]) {
 //        for(size_t i=0; i < sz_; ++i){
 //            arr_[i] = other.arr_[i];
