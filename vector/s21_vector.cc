@@ -20,6 +20,7 @@ int main () {
     std::vector<int> ll = {1,2,5};
   s21::Vector<int> v = {1,2,3};
    v.insert(v.begin,25);
+//   ll.clear();
 //   ll.insert(2,3);
   for (int i = 0 ; i < 4; ++i) {
     std::cout << ll.at(i);

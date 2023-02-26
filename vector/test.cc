@@ -46,14 +46,11 @@ TEST(vector, 6) {
     ASSERT_ANY_THROW(s21_v.at(2));
 }
 
-//TEST(vector, 7) {
-//    s21::Vector<double> s21_v = {1,1,3};
-//    s21::Vector<double> v_v = {4,4,4};
-//    s21_v==v_v;
-//    for(auto i = 0; i < v_v.size() ;++i){
-//        ASSERT_EQ(s21_v[i],4);
-//    }
-//}
+TEST(vector, 7) {
+    s21::Vector<double> s21_v = {1,1,3};
+    s21_v.clear();
+    ASSERT_TRUE(s21_v.empty());
+}
 
 //TEST(vector, ) {
 //
