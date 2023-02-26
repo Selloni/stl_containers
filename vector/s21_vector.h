@@ -64,8 +64,9 @@ public:
     bool empty(){return sz_;}
 
     void clear();
-
-    iterator insert(const_iterator pos, const T& value );
+    git 
+    
+    iterator insert(const_iterator pos, const T& value);
 
 //    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(arr_ = new T[sz_]) {
 //        for(size_t i=0; i < sz_; ++i){
