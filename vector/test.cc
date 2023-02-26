@@ -52,10 +52,35 @@ TEST(vector, 7) {
     ASSERT_TRUE(s21_v.empty());
 }
 
+TEST(vector, 8) {
+     s21::Vector<double> s21_v = {0.2, 0.02, 0.111};
+
+     s21_v.reserve(100);
+
+
+}
+
 //TEST(vector, ) {
 //
 //}
 //
+//TEST(vector, ) {
+//
+//}
+//
+//TEST(vector, ) {
+//
+//}
+//
+//TEST(vector, ) {
+//
+//}
+//
+//TEST(vector, ) {
+//
+//}
+//
+
 
 //TEST(vector, ) {
 //

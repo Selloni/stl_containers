@@ -42,8 +42,10 @@ public:
 
     Vector(std::initializer_list<value_type> const &items);
 
-//    explicit Vector(size_type n)
-//            : m_size_(n), m_capacity_(n), arr_(n ? new T[n] : nullptr) {}
+    // parametrized constructor for fixed size vector (explicit was used in order to
+    // avoid automatic type conversion)
+    explicit Vector(size_type n)
+            : sz_(n), cap_(n), arr_(n ? new T[n] : nullptr) {}
 
     ref at(size_t i);
 
@@ -64,8 +66,7 @@ public:
     bool empty(){return sz_;}
 
     void clear();
-    git 
-    
+
     iterator insert(const_iterator pos, const T& value);
 
 //    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(arr_ = new T[sz_]) {
