@@ -51,6 +51,7 @@ public:
 
     const_ref at(size_t i) const ;
 
+    //////////////////////
     void reserve(size_t n);
 
     size_type size() const {return sz_;}
