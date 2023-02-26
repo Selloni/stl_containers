@@ -68,6 +68,16 @@ void Vector<T>::pop_back() {
     --sz_;
 }
 
+template <typename T>
+T* Vector<T>::insert(const_iterator pos, const T& value ) {
+    Vector<T> tmp(*this);
+    if (pos == this->end()) {
+        push_back(value);
+    } else {
+        tmp.arr_[pos - begin()] = value;
+    }
+
+}
 
 }// s21
 

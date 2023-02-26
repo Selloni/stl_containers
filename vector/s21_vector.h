@@ -36,7 +36,7 @@ public:
 
     ~Vector(){ delete[] arr_; }
 
-    iterator begin(){return arr_;}
+    iterator begin() {return arr_;}
 
     iterator end() {return arr_+sz_;}
 
@@ -62,6 +62,8 @@ public:
     const_ref operator[](size_t i) const { return arr_[i]; }
 
     bool empty(){return sz_;}
+
+    iterator insert(const_iterator pos, const T& value );
 
 //    Vector& operator=(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(arr_ = new T[sz_]) {
 //        for(size_t i=0; i < sz_; ++i){

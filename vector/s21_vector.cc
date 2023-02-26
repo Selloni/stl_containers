@@ -19,10 +19,10 @@
 int main () {
     std::vector<int> ll = {1,2,5};
   s21::Vector<int> v = {1,2,3};
-   v.push_back(25);
-   ll.push_back(2);
+   v.insert(v.begin,25);
+//   ll.insert(2,3);
   for (int i = 0 ; i < 4; ++i) {
-    std::cout << v.at(i);
+    std::cout << ll.at(i);
   }
 
 
