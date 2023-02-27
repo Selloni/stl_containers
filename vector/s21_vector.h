@@ -84,6 +84,8 @@ public:
 
     size_type max_size()const;
 
+    void erase(iterator pos);
+
 };
 } // namespase s21
 

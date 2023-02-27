@@ -29,7 +29,6 @@ void Vector<T>::reserve_more_capacity(size_t size)
     }
 }
 
-
 template <typename T>
 void Vector<T>::reserve(size_t n) {
     if (n > max_size()) throw std::out_of_range("lenght error");
@@ -94,6 +93,8 @@ void Vector<T>::swap(Vector<T> &other) {
 template <typename T>
 void Vector<T>::clear(){while (sz_ != 0) pop_back();}
 
+//////////////////////////
+/////////////////////////
 template <typename T>
 T* Vector<T>::insert(const_iterator pos, const T& value ) {
     Vector<T> tmp(*this);
@@ -104,11 +105,20 @@ T* Vector<T>::insert(const_iterator pos, const T& value ) {
         for (size_t i=(pos-begin()+1); i < sz_ - 1; ++i) {
             arr_[i] = tmp.arr_[i-1];
         }
-
         push_back(tmp.back());
-
         return pos;
     }
+}
+
+template <typename T>
+void Vector<T>::erase(iterator pos) {
+//    Vector<T> tmp(*this);
+//    tmp.arr_= new T[sz_ - 1];
+//    for(size_type i = 0; i < sz_; ++i) {
+//        if(i != pos) { tmp.arr_[i] = arr_[i];}
+//    }
+//    this(&tmp);
+//    tmp.clear();
 }
 
 }// s21
