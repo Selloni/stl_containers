@@ -83,18 +83,18 @@ ASSERT_EQ(v.size(), vc.size());
 ASSERT_EQ(v.max_size(), vc.max_size());
 }
 
-//TEST(vector, 12) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//std::vector<double> vc = {-2, 6, 5, 8};
-//v.reserve(20);
-//vc.reserve(20);
+TEST(vector, 12) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+std::vector<double> vc = {-2, 6, 5, 8};
+v.reserve(20);
+vc.reserve(20);
 
-//ASSERT_EQ(v.empty(), vc.empty());
-//ASSERT_EQ(v.size(), vc.size());
-//ASSERT_EQ(v.max_size(), vc.max_size());
-//ASSERT_EQ(v.capacity(), vc.capacity());
-//}
-//
+ASSERT_EQ(v.empty(), vc.empty());
+ASSERT_EQ(v.size(), vc.size());
+ASSERT_EQ(v.max_size(), vc.max_size());
+ASSERT_EQ(v.capacity(), vc.capacity());
+}
+
 //TEST(vector, 13) {
 //s21::Vector<double> v = {-2, 6, 5, 8};
 //std::vector<double> vc = {-2, 6, 5, 8};
