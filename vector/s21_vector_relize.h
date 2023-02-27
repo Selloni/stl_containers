@@ -44,6 +44,17 @@ void Vector<T>::reserve(size_t n) {
 }
 
 template <typename T>
+Vector<T>& Vector<T>::operator=(const Vector &other) {
+    sz_ = other.sz_;
+    cap_ = other.cap_;
+    arr_= new T[sz_];
+    for(size_t i = 0; i < sz_; ++i){
+        arr_[i] = other.arr_[i];
+    }
+    return *this;
+}
+
+template <typename T>
 T& Vector<T>::at(size_t i) {
     if(i >= sz_) throw std::out_of_range("s21::out_of_range");
     return arr_[i];
@@ -53,6 +64,12 @@ template <typename T>
 const T& Vector<T>::at(size_t i) const {
     if(i >= sz_) throw std::out_of_range("s21::out_of_range");
     return arr_[i];
+}
+
+template <typename T>
+size_t Vector<T>::max_size() const {
+    std::allocator<T> alloc;
+    return alloc.max_size();
 }
 
 template <typename T>
@@ -69,7 +86,7 @@ void Vector<T>::pop_back() {
 }
 
 template <typename T>
-void Vector<T>::clear(){if (sz_ != 0) pop_back();}
+void Vector<T>::clear(){while (sz_ != 0) pop_back();}
 
 template <typename T>
 T* Vector<T>::insert(const_iterator pos, const T& value ) {

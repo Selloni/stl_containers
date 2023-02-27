@@ -19,10 +19,8 @@
 int main () {
 
   s21::Vector<int> v = {1,2,3};
-  std::cout<< "gg" <<v.size();
-  v.reserve(10);
-  std::cout << "jj" << v.size();
-
+    s21::Vector<int > h = {2,3};
+    h = v;
   }
 
 
