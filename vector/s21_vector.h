@@ -64,6 +64,8 @@ public:
 
     void pop_back();
 
+    void swap(vector& other);
+
     ref operator[](size_t i) { return arr_[i]; }
 
     const_ref operator[](size_t i) const { return arr_[i]; }

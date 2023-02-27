@@ -84,6 +84,14 @@ void Vector<T>::pop_back() {
 }
 
 template <typename T>
+void Vector<T>::swap(Vector<T> &other) {
+    Vector<T> tmp = other;
+    other.clear();
+    other = this;
+}
+
+
+template <typename T>
 void Vector<T>::clear(){while (sz_ != 0) pop_back();}
 
 template <typename T>
