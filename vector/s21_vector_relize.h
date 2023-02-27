@@ -17,30 +17,28 @@ cap_ = items.size();
 }
 
 template <typename T>
-void Vector<T>::reserve(size_t n) {
-    if (n <= cap_) return;
-    pointer newarr = reinterpret_cast<pointer>(new int8_t[n*sizeof(T)]); // выделение байт
-    size_t i = 0;
-    try {
-        for (; i < sz_; ++i) {
-            new(newarr + i) T(arr_[i]);
-        }
-    } catch (...) {
-        for(size_t j = 0; j < i; ++j) {
-            (newarr + i)->~T();
-        }
-        delete[] reinterpret_cast<int8_t*>(arr_);
-        throw;
+void Vector<T>::reserve_more_capacity(size_t size)
+{
+    if (size > cap_) {
+        value_type *buff = new value_type[size];
+        for (size_t i = 0; i < sz_; ++i)
+            buff[i] = std::move(arr_[i]);
+        delete[] arr_;
+        arr_ = buff;
+        cap_ = size;
     }
+}
 
-    for(size_t i = 0; i< sz_; i++) {
-        new(newarr  + i) T(arr_[i]); // вызов конструктора по данному адресу
-    }
-    for(size_t i = 0; i < sz_; ++i){
-        (arr_ + i)->~T();   // явный вызов конструктора
-    }
-    delete[] reinterpret_cast<int8_t*>(arr_); //очищаяем массив 
-    arr_ = newarr;
+
+template <typename T>
+void Vector<T>::reserve(size_t n) {
+    if (n > max_size()) throw std::out_of_range("lenght error");
+    reserve_more_capacity(n);
+}
+
+template <typename T>
+size_t  Vector<T>::capacity() const {
+    return (cap_);
 }
 
 template <typename T>

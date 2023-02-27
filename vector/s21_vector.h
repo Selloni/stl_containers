@@ -14,7 +14,7 @@ public:
     using const_ref = const T&;
     using size_type = std::size_t;
     using iterator = T*;
-    using pointer = T*;
+//    using pointer = T*;
     using const_iterator = const T*;
 
 private:
@@ -47,12 +47,16 @@ public:
     explicit Vector(size_type n)
             : sz_(n), cap_(n), arr_(n ? new T[n] : nullptr) {}
 
+    void reserve_more_capacity(size_t size);
+
     ref at(size_t i);
 
     const_ref at(size_t i) const ;
 
     //////////////////////
     void reserve(size_t n);
+
+    size_type capacity() const;
 
     size_type size() const {return sz_;}
 
