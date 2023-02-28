@@ -95,20 +95,20 @@ ASSERT_EQ(v.max_size(), vc.max_size());
 ASSERT_EQ(v.capacity(), vc.capacity());
 }
 
-//TEST(vector, 13) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//std::vector<double> vc = {-2, 6, 5, 8};
-//v.reserve(20);
-//vc.reserve(20);
-//v.shrink_to_fit();
-//vc.shrink_to_fit();
-//
-//ASSERT_EQ(v.empty(), vc.empty());
-//ASSERT_EQ(v.size(), vc.size());
-//ASSERT_EQ(v.max_size(), vc.max_size());
-//ASSERT_EQ(v.capacity(), vc.capacity());
-//}
-//
+TEST(vector, 13) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+std::vector<double> vc = {-2, 6, 5, 8};
+v.reserve(20);
+vc.reserve(20);
+v.shrink_to_fit();
+vc.shrink_to_fit();
+
+ASSERT_EQ(v.empty(), vc.empty());
+ASSERT_EQ(v.size(), vc.size());
+ASSERT_EQ(v.max_size(), vc.max_size());
+ASSERT_EQ(v.capacity(), vc.capacity());
+}
+
 TEST(vector, 14) {
 s21::Vector<double> v = {-2, 6, 5, 8};
 std::vector<double> vc = {-2, 6, 5, 8};
@@ -133,18 +133,18 @@ ASSERT_EQ(v.capacity(), vc.capacity());
 //ASSERT_EQ(v.capacity(), vc.capacity());
 //}
 
-//TEST(vector, 16) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//std::vector<double> vc = {-2, 6, 5, 8};
-//v.erase(v.begin());
-//vc.erase(vc.begin());
-//
-//ASSERT_EQ(v.empty(), vc.empty());
-//ASSERT_EQ(v.size(), vc.size());
-//ASSERT_EQ(v[0], vc[0]);
-//ASSERT_EQ(v.capacity(), vc.capacity());
-//}
-//
+TEST(vector, 16) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+std::vector<double> vc = {-2, 6, 5, 8};
+v.erase(v.begin());
+vc.erase(vc.begin());
+
+ASSERT_EQ(v.empty(), vc.empty());
+ASSERT_EQ(v.size(), vc.size());
+ASSERT_EQ(v[0], vc[0]);
+ASSERT_EQ(v.capacity(), vc.capacity());
+}
+
 TEST(vector, 17) {
 s21::Vector<double> v = {-2, 6, 5, 8};
 std::vector<double> vc = {-2, 6, 5, 8};

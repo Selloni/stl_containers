@@ -2,6 +2,8 @@
 #define S21_RELIZE_V
 
 #include "s21_vector.h"
+#include <memory>
+
 
 namespace s21 {
 template <typename T>
@@ -11,9 +13,9 @@ Vector<T>::Vector(std::initializer_list<value_type> const &items) {
     for (auto it = items.begin(); it != items.end(); it++) {
     arr_[i] = *it;
     i++;
-}
-sz_ = items.size();
-cap_ = items.size();
+    }
+    sz_ = items.size();
+    cap_ = items.size();
 }
 
 template <typename T>
@@ -42,12 +44,28 @@ size_t  Vector<T>::capacity() const {
 
 template <typename T>
 Vector<T>& Vector<T>::operator=(const Vector &other) {
+    if (this == std::addressof(other)) {
+        return *this;
+    }
+    delete [] arr_;
     sz_ = other.sz_;
     cap_ = other.cap_;
-    arr_= new T[sz_];
-    for(size_t i = 0; i < sz_; ++i){
-        arr_[i] = other.arr_[i];
+    try {
+        arr_= new T[sz_];
+    } catch (std::exception &ex) {
+        std::cerr << ex.what() << std::endl;
     }
+    std::copy(other.begin(), other.end(), arr_);
+    return *this;
+}
+
+template <typename T>
+Vector<T> &Vector<T>::operator=(Vector<T> &&other) {
+    if (this == &other) {
+        return *this;
+    }
+    delete [] arr_;
+    swap_(*this, other);
     return *this;
 }
 
@@ -84,11 +102,18 @@ void Vector<T>::pop_back() {
 
 template <typename T>
 void Vector<T>::swap(Vector<T> &other) {
-    Vector<T> tmp = other;
-    other.clear();
-    other = this;
+    Vector<T> tmp(std::move(other));
+    other = std::move(*this);
+    *this = std::move(tmp);
 }
 
+
+template <typename T>
+void Vector<T>::swap_(Vector& to, Vector& other) {
+    std::swap(to.arr_, other.arr_);
+    std::swap(to.sz_, other.sz_);
+    std::swap(to.cap_, other.cap_);
+}
 
 template <typename T>
 void Vector<T>::clear(){while (sz_ != 0) pop_back();}
@@ -111,14 +136,35 @@ T* Vector<T>::insert(const_iterator pos, const T& value ) {
 }
 
 template <typename T>
-void Vector<T>::erase(iterator pos) {
-//    Vector<T> tmp(*this);
-//    tmp.arr_= new T[sz_ - 1];
-//    for(size_type i = 0; i < sz_; ++i) {
-//        if(i != pos) { tmp.arr_[i] = arr_[i];}
-//    }
-//    this(&tmp);
-//    tmp.clear();
+T* Vector<T>::erase(iterator pos) {
+    if(pos < begin() || pos >= end()) {
+        return pos;
+    }
+    Vector<T> tmp(std::move(*this));
+
+    try {
+        arr_ = new T[tmp.sz_ - 1];
+    } catch (std::exception &exc) {
+        std::cerr << exc.what() << '\n';
+        return pos;
+    }
+    sz_ = tmp.sz_ - 1;
+    cap_ = tmp.cap_;
+
+    iterator current = pos;
+    int i = 0;
+    for(auto it = tmp.begin(); it != tmp.end(); ++it) {
+        if (it != pos) {
+            arr_[i++] = *it;
+        }
+    }
+    return current;
+}
+
+template <typename T>
+void Vector<T>::shrink_to_fit() {
+    if (sz_ = cap_) return;
+
 }
 
 }// s21

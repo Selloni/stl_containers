@@ -2,6 +2,7 @@
 #define S21_VECTOR_H_
 
 #include <initializer_list>
+#include <iostream>
 
 
 namespace s21 {
@@ -18,34 +19,32 @@ public:
     using const_iterator = const T*;
 
 private:
-    T* arr_; // pointer array
-    size_t sz_; // count size
-    size_t cap_; // count element
-
+    size_t sz_;
+    size_t cap_;
+    T* arr_;
 public:
     ////// конструктор /////
-    Vector(): arr_(nullptr), sz_(0u), cap_(0u)
-    {}
+    Vector():sz_(0u), cap_(0u), arr_(nullptr) {}
 
-    Vector(Vector &other) : sz_(other.sz_), cap_(other.cap_), arr_(other.arr_) {}
+    Vector(const Vector &other) : sz_(other.sz_), cap_(other.cap_), arr_(other.arr_) {}
 
     Vector(Vector &&other) : sz_(other.sz_), cap_(other.cap_), arr_(other.arr_) {
         other.arr_= nullptr;
-        other.sz_= 0;
+        other.sz_= other.cap_ = 0;
     }
 
     ~Vector(){ delete[] arr_; }
 
-    iterator begin() {return arr_;}
+    iterator begin() const { return arr_;}
 
-    iterator end() {return arr_+sz_;}
+    iterator end() const {return arr_ + sz_;}
 
     Vector(std::initializer_list<value_type> const &items);
 
     // parametrized constructor for fixed size vector (explicit was used in order to
     // avoid automatic type conversion)
     explicit Vector(size_type n)
-            : sz_(n), cap_(n), arr_(n ? new T[n] : nullptr) {}
+            : sz_(n), cap_(n), arr_(n ? new T[n]() : nullptr) {}
 
     void reserve_more_capacity(size_t size);
 
@@ -64,7 +63,7 @@ public:
 
     void pop_back();
 
-    void swap(vector& other);
+    void swap(Vector& other);
 
     ref operator[](size_t i) { return arr_[i]; }
 
@@ -82,9 +81,18 @@ public:
 
     Vector& operator=(const Vector &other);
 
+    Vector& operator=(Vector &&other);
+
     size_type max_size()const;
 
-    void erase(iterator pos);
+    iterator erase(iterator pos);
+
+    void shrink_to_fit();
+
+private:
+    void swap_(Vector& to, Vector& other);
+
+
 
 };
 } // namespase s21
