@@ -46,8 +46,6 @@ public:
     explicit Vector(size_type n)
             : sz_(n), cap_(n), arr_(n ? new T[n]() : nullptr) {}
 
-    void reserve_more_capacity(size_t size);
-
     ref at(size_t i);
 
     const_ref at(size_t i) const ;
@@ -89,11 +87,11 @@ public:
 
     void shrink_to_fit();
 
+//    iterator data() noexcept;
+
 private:
     void swap_(Vector& to, Vector& other);
-
-
-
+    void reserve_more_capacity_(size_t size);
 };
 } // namespase s21
 

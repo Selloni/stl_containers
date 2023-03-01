@@ -120,7 +120,7 @@ ASSERT_EQ(v.size(), vc.size());
 ASSERT_EQ(v.max_size(), vc.max_size());
 ASSERT_EQ(v.capacity(), vc.capacity());
 }
-
+//
 //TEST(vector, 15) {
 //s21::Vector<double> v = {-2, 6, 5, 8};
 //std::vector<double> vc = {-2, 6, 5, 8};
