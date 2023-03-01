@@ -168,8 +168,11 @@ void Vector<T>::shrink_to_fit() {
     reserve_more_capacity_(sz_);
 }
 //
-//template <typename T, typename Args...>
-//iterator emplace( const_iterator pos, Args&&... args);
+template <typename T, typename Args...>
+iterator emplace( const_iterator pos, Args&&... args){
+        for (auto &i : {args...}) insert(pos, i);
+        return pos;
+}
 
 }// s21
 
