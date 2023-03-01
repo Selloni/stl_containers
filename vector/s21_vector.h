@@ -71,7 +71,7 @@ public:
 
     void clear();
 
-    iterator insert(const_iterator pos, const T& value);
+    iterator insert(iterator pos, const T& value);
 
     const_ref front() {return arr_[0];}
 

@@ -120,13 +120,12 @@ ASSERT_EQ(v.size(), vc.size());
 ASSERT_EQ(v.max_size(), vc.max_size());
 ASSERT_EQ(v.capacity(), vc.capacity());
 }
-//
+
 //TEST(vector, 15) {
 //s21::Vector<double> v = {-2, 6, 5, 8};
 //std::vector<double> vc = {-2, 6, 5, 8};
 //v.insert(v.begin(), 15);
 //vc.insert(vc.begin(), 15);
-//
 //ASSERT_EQ(v.empty(), vc.empty());
 //ASSERT_EQ(v.size(), vc.size());
 //ASSERT_EQ(v[0], vc[0]);
@@ -179,19 +178,19 @@ ASSERT_EQ(v2.size(), vc2.size());
 ASSERT_EQ(v2.capacity(), vc2.capacity());
 }
 
-//TEST(vector, 20) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//std::vector<double> vc = {-2, 6, 5, 8};
-//
-//auto v2 = v.begin();
-//auto vc2 = vc.begin();
-//
-//ASSERT_EQ(*v2, *vc2);
-//v2++;
-//vc2++;
-//ASSERT_EQ(*v2, *vc2);
-//}
-//
+TEST(vector, 20) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+std::vector<double> vc = {-2, 6, 5, 8};
+
+auto v2 = v.begin();
+auto vc2 = vc.begin();
+
+ASSERT_EQ(*v2, *vc2);
+v2++;
+vc2++;
+ASSERT_EQ(*v2, *vc2);
+}
+
 //TEST(vector, 21) {
 //s21::Vector<double> v = {-2, 6, 5, 8};
 //auto it = v.begin();
@@ -201,7 +200,7 @@ ASSERT_EQ(v2.capacity(), vc2.capacity());
 //ASSERT_EQ(v.size(), 9);
 //ASSERT_EQ(v.at(3), 5);
 //}
-//
+
 //TEST(vector, 22) {
 //s21::Vector<double> v = {-2, 6, 5, 8};
 //auto it = v.begin();

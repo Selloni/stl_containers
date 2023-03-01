@@ -118,22 +118,16 @@ void Vector<T>::swap_(Vector& to, Vector& other) {
 template <typename T>
 void Vector<T>::clear(){while (sz_ != 0) pop_back();}
 
-//////////////////////////
-/////////////////////////
-template <typename T>
-T* Vector<T>::insert(const_iterator pos, const T& value ) {
-    Vector<T> tmp(*this);
-    if (pos == this->end()) {
-        push_back(value);
-    } else {
-        arr_[pos - begin()] = value;
-        for (size_t i=(pos-begin()+1); i < sz_ - 1; ++i) {
-            arr_[i] = tmp.arr_[i-1];
-        }
-        push_back(tmp.back());
-        return pos;
-    }
-}
+//template <typename T>
+//T* Vector<T>::insert(iterator pos, const T &value) {
+//    Vector<T> tmp(*this);
+//    arr_[pos - begin()] = value;
+//    for (size_t i= (pos-begin() + 1); i < sz_; ++i) {
+//        arr_[i] = tmp.arr_[i-1];
+//    }
+//    push_back(tmp.back());
+//    return pos;
+//}
 
 template <typename T>
 T* Vector<T>::erase(iterator pos) {
@@ -149,7 +143,6 @@ T* Vector<T>::erase(iterator pos) {
     }
     sz_ = tmp.sz_ - 1;
     cap_ = tmp.cap_;
-
     iterator current = pos;
     int i = 0;
     for(auto it = tmp.begin(); it != tmp.end(); ++it) {
