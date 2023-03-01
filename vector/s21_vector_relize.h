@@ -29,8 +29,6 @@ void Vector<T>::reserve_more_capacity_(size_t size)
         cap_ = size;
 }
 
-
-
 template <typename T>
 void Vector<T>::reserve(size_t n) {
     if (n > max_size()) throw std::out_of_range("lenght error");
@@ -118,16 +116,27 @@ void Vector<T>::swap_(Vector& to, Vector& other) {
 template <typename T>
 void Vector<T>::clear(){while (sz_ != 0) pop_back();}
 
-//template <typename T>
-//T* Vector<T>::insert(iterator pos, const T &value) {
-//    Vector<T> tmp(*this);
-//    arr_[pos - begin()] = value;
-//    for (size_t i= (pos-begin() + 1); i < sz_; ++i) {
-//        arr_[i] = tmp.arr_[i-1];
-//    }
-//    push_back(tmp.back());
-//    return pos;
-//}
+template <typename T>
+T* Vector<T>::insert(iterator pos, const_ref value) {
+    if (pos > end()) return pos;
+    Vector tmp(std::move(*this));
+    arr_ = new T[tmp.sz_+1]();
+    sz_ = tmp.sz_ + 1;
+    cap_ = tmp.cap_;
+
+    if(cap_ <= sz_) reserve(cap_ * 2);
+    int i = 0;
+    for(iterator it = tmp.begin(); it < tmp.end(); ++it) {
+       if (it == pos) {
+           arr_[i++]= value;
+           arr_[i++]= *it;
+
+       }else {
+           arr_[i++] = *it;
+       }
+    }
+    return pos;
+}
 
 template <typename T>
 T* Vector<T>::erase(iterator pos) {
@@ -158,6 +167,9 @@ void Vector<T>::shrink_to_fit() {
     if (sz_ == cap_) return;
     reserve_more_capacity_(sz_);
 }
+//
+//template <typename T, typename Args...>
+//iterator emplace( const_iterator pos, Args&&... args);
 
 }// s21
 

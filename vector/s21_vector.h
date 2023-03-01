@@ -35,7 +35,7 @@ public:
 
     ~Vector(){ delete[] arr_; }
 
-    iterator begin() const { return arr_;}
+    iterator begin() const {return arr_;}
 
     iterator end() const {return arr_ + sz_;}
 
@@ -86,6 +86,8 @@ public:
     iterator erase(iterator pos);
 
     void shrink_to_fit();
+
+//    iterator emplace(const_iterator pos, Args&&... args);
 
 //    iterator data() noexcept;
 
