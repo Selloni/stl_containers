@@ -191,25 +191,25 @@ vc2++;
 ASSERT_EQ(*v2, *vc2);
 }
 
-//TEST(vector, 21) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//auto it = v.begin();
-//++ ++it;
-//v.emplace(it, 8, 1, 4, 12, -6);
-//ASSERT_EQ(v.size(), 9);
-//ASSERT_EQ(v.at(3), 5);
-//}
+TEST(vector, 21) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+auto it = v.begin();
+++ ++it;
+v.emplace(it, 8, 1, 4, 12, -6);
+ASSERT_EQ(v.size(), 9);
+ASSERT_EQ(v.at(3), 5);
+}
 
-//TEST(vector, 22) {
-//s21::Vector<double> v = {-2, 6, 5, 8};
-//auto it = v.begin();
-//++ ++it;
-//v.emplace_back(8, 1, 4, 12, -6);
-//
-//ASSERT_EQ(v.size(), 9);
-//ASSERT_EQ(v.at(5), 1);
-//ASSERT_EQ(v.back(), -6);
-//}
+TEST(vector, 22) {
+s21::Vector<double> v = {-2, 6, 5, 8};
+auto it = v.begin();
+++ ++it;
+v.emplace_back(8, 1, 4, 12, -6);
+
+ASSERT_EQ(v.size(), 9);
+ASSERT_EQ(v.at(5), 1);
+ASSERT_EQ(v.back(), -6);
+}
 
 
 //TEST(vector, ) {
@@ -235,8 +235,6 @@ ASSERT_EQ(*v2, *vc2);
 //TEST(vector, ) {
 //
 //}
-
-
 
  int main(int argc, char **argv) {
    ::testing::InitGoogleTest(&argc, argv);

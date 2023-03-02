@@ -87,19 +87,23 @@ public:
 
     void shrink_to_fit();
 
-//    iterator emplace(const_iterator pos, Args&&... args);
+    template <typename... Args>
+    iterator emplace(iterator pos, Args &&...args);
+
+    template <typename... Args>
+    void emplace_back(Args&&... args);
 
 //    iterator data() noexcept;
 
-    reference operator+(int n){return *(arr_+= n);}
-    reference operator-(int n){return *(arr_-= n);}
-    reference operator++(int){return *(arr_++);}
-    reference operator--(int){return *(arr_--);}
-    reference operator++(){return *(++arr_);}
-    reference operator--(){return *(--arr_);}
-    reference operator*(){return *arr_;}
+    ref operator+(int n){return *(arr_+= n);}
+    ref operator-(int n){return *(arr_-= n);}
+    ref operator++(int){return *(arr_++);}
+    ref operator--(int){return *(arr_--);}
+    ref operator++(){return *(++arr_);}
+    ref operator--(){return *(--arr_);}
+    ref operator*(){return *arr_;}
     bool operator != (const iterator &it) {return arr_ != it.arr_;}
-    bool operator == (const iterator &it) {return arr == it.arr;}
+    bool operator == (const iterator &it) {return arr_ == it.arr;}
 
 private:
     void swap_(Vector& to, Vector& other);

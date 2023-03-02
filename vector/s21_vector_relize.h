@@ -170,10 +170,17 @@ void Vector<T>::shrink_to_fit() {
 
     template <typename T>
     template <typename... Args>
-    typename Vector<T>::iterator Vector<T>::emplace(iterator pos, Args &&...args) {
+    T* Vector<T>::emplace(iterator pos, Args &&...args) {
         for (auto &i : {args...}) insert(pos, i);
         return pos;
     }
+
+    template <typename T>
+    template <typename... Args>
+    void Vector<T>::emplace_back(Args&&... args) {
+        for(auto &i : {args...}) push_back(i);
+    }
+
 
 }// s21
 
