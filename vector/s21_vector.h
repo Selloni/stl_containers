@@ -87,7 +87,7 @@ public:
 
     void shrink_to_fit();
 
-    iterator emplace(const_iterator pos, Args&&... args);
+//    iterator emplace(const_iterator pos, Args&&... args);
 
 //    iterator data() noexcept;
 
