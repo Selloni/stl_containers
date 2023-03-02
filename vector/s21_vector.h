@@ -91,6 +91,16 @@ public:
 
 //    iterator data() noexcept;
 
+    reference operator+(int n){return *(arr_+= n);}
+    reference operator-(int n){return *(arr_-= n);}
+    reference operator++(int){return *(arr_++);}
+    reference operator--(int){return *(arr_--);}
+    reference operator++(){return *(++arr_);}
+    reference operator--(){return *(--arr_);}
+    reference operator*(){return *arr_;}
+    bool operator != (const iterator &it) {return arr_ != it.arr_;}
+    bool operator == (const iterator &it) {return arr == it.arr;}
+
 private:
     void swap_(Vector& to, Vector& other);
     void reserve_more_capacity_(size_t size);

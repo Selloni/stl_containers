@@ -1,8 +1,8 @@
-// #include "s21_container.h"
-#include <vector>
-#include <iostream>
-#include "stopwatch.h"
-#include "s21_vector_relize.h"
+//// #include "s21_container.h"
+//#include <vector>
+//#include <iostream>
+//#include "stopwatch.h"
+//#include "s21_vector_relize.h"
 
 // template <typename T>
 // void f(T x) {
@@ -17,35 +17,34 @@
 
 // using namespace s21;
 
-int main () {
-    {
-        s21::StopWatch<s21::steady_clock> clock;
-        s21::Vector<int> vec{1, 2, 3, 4, 5};
-        s21::Vector<int> vet_to_copy = {5, 4, 3, 2, 1};
-        clock.start();
-        vec.reserve(100);
-        clock.stop();
-        std::cout << clock.nanoseconds();
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct A {
+    std::string s;  A(std::string str) : s(std::move(str))  { std::cout << " constructed\n"; }  A(const A& o) : s(o.s) { std::cout << " copy constructed\n"; }  A(A&& o) : s(std::move(o.s)) { std::cout << " move constructed\n"; }  A& operator=(const A& other) {  s = other.s;
+        std::cout << " copy assigned\n";
+        return *this;
+    }  A& operator=(A&& other) {  s = std::move(other.s);
+        std::cout << " move assigned\n";
+        return *this;
     }
+};
+
+int main()
+{
+    std::vector<A> container;
+    // reserve enough place so vector does not have to resize  container.reserve(10);
+    std::cout << "construct 2 times A:\n";  A two { "two" };  A three { "three" };
+
+    std::cout << "emplace:\n";  container.emplace(container.end(), "one");
+
+    std::cout << "emplace with A&:\n";  container.emplace(container.end(), two);
+
+    std::cout << "emplace with A&&:\n";  container.emplace(container.end(), std::move(three));
+
+    std::cout << "content:\n";
+    for (const auto& obj : container)
+        std::cout << ' ' << obj.s;
     std::cout << '\n';
-    {
-        s21::StopWatch<s21::steady_clock> clock;
-        std::vector<int> vec{1, 2, 3, 4, 5};
-        std::vector<int> vet_to_copy = {5, 4, 3, 2, 1};
-        clock.start();
-        vec.reserve(100);
-        clock.stop();
-        std::cout << clock.nanoseconds();
-    }
-//
-//    for (int  i = 0; i < vec.size(); ++ i) {
-//        std::cout << 'v' <<vec[i] << " ";
-//    }
-//    std::cout << '\n';
-//    for (int  i = 0; i < vet_to_copy.size(); ++ i) {
-//        std::cout << vet_to_copy[i] << " ";
-//    }
-
 }
-
-
