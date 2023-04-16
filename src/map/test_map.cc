@@ -2,7 +2,7 @@
 #include "s21_map.h"
 #include "s21_map_reliz.cc"
 #include <gtest/gtest.h>
-#include <iterator>
+// #include <iterator>
 #include <map>
 
 using namespace std;
@@ -23,8 +23,8 @@ protected:
     std_emp = new std::map<int, int>();
   }
   void TearDown() {
-    delete s21_m;
-    delete s21_emp;
+    // delete s21_m;
+    // delete s21_emp;
     delete std_m;
     delete std_emp;
   }
@@ -89,7 +89,10 @@ TEST_F(Test_map, 9) {
 
 TEST_F(Test_map, 10) {
   pair<int, int> tmp{3, 3};
-  EXPECT_EQ(*s21_m->end(), tmp);
+  s21::map<int, int>::iterator it;
+  it = s21_m->end();
+  --it;
+  EXPECT_EQ(*it, tmp);
 }
 
 TEST_F(Test_map, 11) {

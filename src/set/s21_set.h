@@ -1,36 +1,33 @@
 #ifndef S21_SET_H_
 #define S21_SET_H_
 
-// #include "../map/s21_map.h"
-#include "../map/s21_map_reliz.cc"
+#include "../virtual_class/virtual_assoc_reliz.cc"
 
 namespace s21 {
 
-template <class T, typename S = int> class set : public map<T, S> {
-  node<T, S> *root_ = nullptr;
-
+template <class T, typename S> class set : public virtual_map_set<T, S> {
 public:
   using key_type = T;
-  using value_type = key_type;
+  using value_type = std::pair<const T, T>;
   using refernce = value_type &;
   using const_reference = const value_type &;
-  using iterator = iterator_tree<T, S>;
-  using const_iterator = const iterator_tree<T, S>;
+  using iterator = iterator_set<T, S>;
+  using const_iterator = const iterator_set<T, S>;
   using size_type = size_t;
 
-public:
-  set() : root_(nullptr){};
-  set(std::initializer_list<value_type> const &items);
+  set(){};
+  set(std::initializer_list<key_type> const &items);
   set(const set &s);
   set(set &&s);
   ~set() { this->destroy(this->root_); };
+
   set &operator=(set &s);
   set &operator=(set &&s);
   /////////////////////////////
   ////   Set Iterators    ////
   ///////////////////////////
-  //   iterator begin();
-  //   iterator end();
+  iterator begin();
+  iterator end();
   //   /////////////////////////////
   //   ////    Set Capacity    ////
   //   ///////////////////////////
@@ -42,9 +39,9 @@ public:
   //   ///////////////////////////
   //   void clear();
   std::pair<iterator, bool> insert(const value_type &value);
-  //   void erase(iterator pos);
+  void erase(iterator pos);
   //   void swap(set &other);
-  //   void merge(set &other);
+  void merge(set &other);
   /////////////////////////////
   ////     Set Lookup     ////
   ///////////////////////////
@@ -59,8 +56,9 @@ private:
   //   void turn_left(node<T, S> *(&root));
   //   void turn_right(node<T, S> *(&root));
   //   void print_key(node<T, S> *knot);
-  //   std::pair<iterator, bool> push(node<T, S> *(&knot), std::pair<T, S>
-  //   value); void set_balance(node<T, S> *knot); int height(node<T, S> *knot);
+  std::pair<iterator, bool> push(node<T, S> *(&knot), std::pair<T, S> value);
+  //  void set_balance(node<T, S> *knot);
+  //  int height(node<T, S> *knot);
   //   void destroy(node<T, S> *&knot);
   //   void remove(node<T, S> *&knot, std::pair<T, S> value);
   //   node<T, S> *get_min(node<T, S> *(&knot));
